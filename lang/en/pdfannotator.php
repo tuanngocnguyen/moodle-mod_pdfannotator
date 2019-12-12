@@ -202,6 +202,125 @@ $string['modulename'] = 'PDF Annotation';
 $string['modulename_help'] = 'This Tool enables collaborative markup on PDF Documents. The users are able to annotate specific parts of an PDF and discuss them with other users.';
 $string['modulename_link'] = 'mod/pdfannotator/view';
 $string['modulenameplural'] = 'PDF Annotations';
+$string['pdfannotatorname'] = 'PDF Annotation Tool';
+$string['pluginadministration'] = 'PDF Annotation administration';
+$string['pluginname'] = 'PDF Annotation';
+$string['setting_alternative_name'] = 'Name';
+$string['setting_alternative_name_help'] = "If the name is more than 20 characters long, the remaining characters will be replaced with '...' in the annotator's internal tab navigation.";
+$string['setting_alternative_name_desc'] = 'Provide an alternative name for the PDF. If empty, the name of the pdf will be taken as representative name';
+$string['setting_anonymous'] = 'Allow anonymous posting?';
+$string['setting_col_annotating_enabled'] = 'Enable collaborative annotation on PDF';
+$string['setting_fileupload'] = 'Select a pdf-file';
+$string['setting_fileupload_help'] = "You can only change the selected file until the annotator has been created by a click on 'Save'.";
+$string['setting_usevotes'] = "Votes/Likes";
+$string['setting_usevotes_help'] = "With this option enabled, users can like / vote for posts other than their own.";
+$string['setting_use_studenttextbox'] = "Textbox";
+$string['setting_use_studenttextbox_help'] = "Please note that textbox annotations are not anonymous and can neither be commented nor reported.";
+$string['setting_use_studentdrawing'] = "Drawing";
+$string['setting_use_studentdrawing_help'] = "Allow participants to save and print the pdf document without annotations or comments";
+
+
+$string['setting_useprint'] = "save and print";
+$string['setting_useprint_help'] = "Please note that drawings are not anonymous and can neither be commented nor reported.";
+$string['setting_useprint_document'] = 'save and print pdf document';
+$string['setting_useprint_document_help'] = 'Allow participants to save and print the pdf document';
+$string['setting_useprint_comments'] = 'save and print comments';
+$string['setting_useprint_comments_help'] = 'Allow participants to save and print the annotations and comments';
+
+$string['setting_choosetimespanfornews'] = "For how long should a comment be marked as new?";
+$string['usevotes'] = "Allow users to like comments.";
+$string['use_studenttextbox'] = "Enable textbox tool for participants?";
+$string['use_studentdrawing'] = "Enable drawing for participants?";
+$string['useprint'] = "Give participants access to the PDF?";
+$string['useprint_document'] = "Give participants access to the PDF?";
+$string['useprint_comments'] = "Give participants access to the PDF and its comments?";
+
+$string['allquestionsimgtitle'] = "Show all questions in this document";
+$string['questionsimgtitle'] = "Show all questions on this page";
+$string['search'] = "Search";
+
+$string['legacyfiles'] = 'Migration of old course file';
+$string['legacyfilesactive'] = 'Active';
+$string['legacyfilesdone'] = 'Finished';
+$string['clicktoopen2'] = 'Click {$a} link to view the file.';
+$string['dnduploadpdfannotator'] = 'Create file for PDF Annotation';
+$string['pdfannotatorcontent'] = 'Files and subfolders';
+$string['filenotfound'] = 'File not found, sorry.';
+$string['public'] = 'public';
+$string['anonymous'] = 'Anonymous';
+$string['sendAnonymous'] = 'post anonymous';
+$string['pleaseSelectReportReason'] = '--- Please indicate your reason for reporting this comment. ---';
+$string['reportreason'] = 'Reason for reporting this comment';
+$string['reason'] = 'Explanation';
+$string['titleforreportcommentform'] = 'Report comment';
+$string['subtitleforreportcommentform'] = 'Your message for the course manager';
+$string['inaccurate'] = 'inaccurate';
+$string['inappropriate'] = 'inappropriate';
+$string['other_reason'] = 'other reason';
+$string['location'] = 'Pdf';
+$string['slotdatetimelabel'] = 'Date and time';
+$string['comment'] = 'Comment';
+$string['reportedcomment'] = 'Reported comment';
+$string['reportedby'] = 'by / on';
+$string['writtenby'] = 'from / to';
+$string['lastanswered'] = 'Last Answer';
+$string['correct'] = 'correct';
+$string['comments'] = 'Comments';
+$string['author'] = 'Author';
+$string['guestscantdoanything'] = 'Guests can\'t do anything here.';
+$string['newanswersavailable'] = 'Recently answered';
+$string['newquestions'] = 'Recently asked';
+$string['read'] = 'Read';
+$string['page'] = 'page';
+$string['location'] = 'Location';
+$string['comment'] = 'Comment';
+$string['view'] = 'Document';
+$string['overview'] = 'Overview';
+$string['pdfannotatorcolumn'] = 'Document';
+$string['itemsperpage'] = 'Items per page';
+$string['show'] = 'Show';
+$string['all'] = 'all';
+
+$string['openquestions'] = 'unsolved';
+$string['closedquestions'] = 'solved';
+$string['allquestions'] = 'all';
+
+$string['allanswers'] = 'all';
+$string['subscribedanswers'] = 'to my subscribed questions';
+$string['allreports'] = 'all reports';
+$string['unseenreports'] = 'unread only';
+$string['seenreports'] = 'read only';
+$string['questionstab'] = 'Unsolved questions';
+$string['questionstabicon'] = 'Unsolved questions';
+$string['questionstabicon_help'] = 'This page displays all unsolved questions that were asked in this course. You can also choose to see all or all solved questions in this course.';
+$string['answerstab'] = 'Answers';
+$string['answerstabicon'] = 'Answers';
+$string['answerstabicon_help'] = "This page can show you all answers or only answers to questions you subscribed* to. The list covers all annotators in this course.<br>*When you post a question yourself, you are automatically subscribed to it as long as you don't unsubscribe.";
+$string['ownpoststab'] = 'My posts';
+$string['ownpoststabicon'] = 'My posts';
+$string['ownpoststabicon_help'] = 'This page displays all comments that you posted in this course.';
+$string['reportstab'] = 'Reported comments';
+$string['reportstabicon'] = 'Reported comments';
+$string['reportstabicon_help'] = 'This page displays comments that were reported as inappropriate in this course. You can choose to see only unread/read* reports or all reports.<br>* Any manager of this course can mark a report as read.';
+$string['voteshelpicon'] = 'Likes';
+$string['voteshelpicon_help'] = 'This column tells you how many other people take an interest in the question.';
+$string['voteshelpicontwo'] = 'Likes';
+$string['voteshelpicontwo_help'] = 'This column tells you how often your posts were <em>liked</em>.';
+$string['answercounthelpicon'] = 'Number of answers';
+$string['answercounthelpicon_help'] = 'This column tells you how many answers a question has received.';
+$string['iscorrecthelpicon'] = 'Correct';
+$string['iscorrecthelpicon_help'] = 'When a teacher or manager has marked an answer as correct, a green check mark appears next to it.';
+$string['recyclebintab'] = 'Read';
+$string['recyclebintabicon'] = 'Read';
+$string['recyclebintabicon_help'] = "This page displays all reports marked as <em>seen</em> in this course";
+
+$string['markasread'] = 'Mark as read';
+$string['markasunread'] = 'Mark as unread';
+$string['successfullymarkedasread'] = 'The report was marked as read.';
+$string['successfullymarkedasreadandnolongerdisplayed'] = 'The report was marked as read and removed from the table.';
+$string['successfullymarkedasunread'] = 'The report was marked as unread.';
+$string['successfullymarkedasunreadandnolongerdisplayed'] = 'The report was marked as unread and removed from the table.';
+=======
 $string['month'] = 'month';
 $string['months'] = 'months';
 $string['myanswers'] = 'my answers';
@@ -371,8 +490,8 @@ $string['error:openprintview'] = 'An error has occured while trying to open the 
 $string['error:printcomments'] = 'An error has occured while trying to open the comments in a pdf.';
 $string['error:editcomment'] = 'An error has occured while trying to edit a comment.';
 $string['error:hideComment'] = "An error has occured while trying to hide the comment from participants' view.";
-$string['error:redihideCommentsplayComment'] = 'Beim Wiedereinblenden des Kommentars für Teilnehmer ist ein Fehler aufgetreten.';
-$string['error:closequestion'] = 'An error has occured while closing/openingthe question.';
+$string['error:redihideCommentsplayComment'] = 'An error occurred while re-inserting the comment for attendees.';
+$string['error:closequestion'] = 'An error has occured while closing/opening the question.';
 $string['error:markcorrectanswer'] = 'An error has occured while marking the answer as correct.';
 $string['error:settimespan'] = "An error has occured while trying to set the timespan for new questions.";
 $string['error:hide'] = 'An error has occured while hiding the element.';
@@ -392,10 +511,10 @@ $string['decision:overlappingAnnotation'] = 'You clicked an area, in which is mo
 
 $string['eventreport_added'] = 'A comment was reported';
 
-$string['reportaddedhtml'] = '{$a->reportinguser} has reportet a comment with the message: <br /><br /> "{$a->introduction}"<br /><br />
+$string['reportaddedhtml'] = '{$a->reportinguser} has reported a comment with the message: <br /><br /> "{$a->introduction}"<br /><br />
 It is <a href="{$a->urltoreport}">available on the web site</a>.';
 
-$string['reportaddedtext'] = '{$a->reportinguser} has reportet a comment with the message:
+$string['reportaddedtext'] = '{$a->reportinguser} has reported a comment with the message:
 
     "{$a->introduction}"
 
