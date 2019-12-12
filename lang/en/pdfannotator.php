@@ -320,7 +320,6 @@ $string['successfullymarkedasread'] = 'The report was marked as read.';
 $string['successfullymarkedasreadandnolongerdisplayed'] = 'The report was marked as read and removed from the table.';
 $string['successfullymarkedasunread'] = 'The report was marked as unread.';
 $string['successfullymarkedasunreadandnolongerdisplayed'] = 'The report was marked as unread and removed from the table.';
-=======
 $string['month'] = 'month';
 $string['months'] = 'months';
 $string['myanswers'] = 'my answers';
