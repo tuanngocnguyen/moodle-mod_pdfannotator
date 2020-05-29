@@ -31,13 +31,17 @@ use \core_privacy\local\request\writer;
 use \core_privacy\local\request\helper as request_helper;
 use \core_privacy\local\metadata\collection;
 use \core_privacy\local\request\transform;
+use \core_privacy\local\request\approved_userlist;
+use \core_privacy\local\request\userlist;
 
 /**
  * Description of provider
  *
  * @author Admin
  */
-class provider implements \core_privacy\local\metadata\provider, \core_privacy\local\request\plugin\provider {
+class provider implements \core_privacy\local\metadata\provider,
+    \core_privacy\local\request\core_userlist_provider,
+    \core_privacy\local\request\plugin\provider {
 
     /**
      * This function implements the \core_privacy\local\metadata\provider interface.
@@ -432,4 +436,112 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
         }
     }
 
+    /**
+     * @inheritDoc
+     */
+    public static function get_users_in_context(userlist $userlist) {
+        $context = $userlist->get_context();
+
+        if ($context->contextlevel != CONTEXT_MODULE) {
+            return;
+        }
+        $params = [
+            'modname' => 'pdfannotator',
+            'cmid' => $context->instanceid
+        ];
+
+        // Comments.
+        $sql = "SELECT com.user_id
+                  FROM {pdfannotator_comments} com
+                  JOIN {course_modules} cm ON cm.instance = com.pdfannotatorid
+                  JOIN {modules} m ON m.id = cm.module AND m.name = :modname
+                 WHERE cm.id = :cmid";
+
+        $userlist->add_from_sql('user_id', $sql, $params);
+
+        // Reports.
+        $sql = "SELECT rep.user_id
+                  FROM {pdfannotator_reports} rep
+                  JOIN {course_modules} cm ON cm.instance = rep.pdfannotatorid
+                  JOIN {modules} m ON m.id = cm.module AND m.name = :modname
+                 WHERE cm.id = :cmid";
+
+        $userlist->add_from_sql('user_id', $sql, $params);
+
+        // Annotation.
+        $sql = "SELECT ann.user_id
+                  FROM {pdfannotator_annotations} ann
+                  JOIN {course_modules} cm ON cm.instance = ann.pdfannotatorid
+                  JOIN {modules} m ON m.id = cm.module AND m.name = :modname
+                 WHERE cm.id = :cmid";
+
+        $userlist->add_from_sql('user_id', $sql, $params);
+
+        // Subscription.
+        $sql = "SELECT sub.user_id
+                  FROM {pdfannotator_subscriptions} sub
+                  JOIN {pdfannotator_annotations} ann ON anno.id = sub.annotationid
+                  JOIN {course_modules} cm ON cm.instance = ann.pdfannotatorid
+                  JOIN {modules} m ON m.id = cm.module AND m.name = :modname
+                 WHERE cm.id = :cmid";
+
+        $userlist->add_from_sql('user_id', $sql, $params);
+
+        // Votes.
+        $sql = "SELECT vote.user_id
+                  FROM {pdfannotator_votes} vote
+                  JOIN {pdfannotator_comments} com ON vote.commentid = com.id
+                  JOIN {course_modules} cm ON cm.instance = com.pdfannotatorid
+                  JOIN {modules} m ON m.id = cm.module AND m.name = :modname
+                 WHERE cm.id = :cmid";
+
+        $userlist->add_from_sql('user_id', $sql, $params);    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function delete_data_for_users(approved_userlist $userlist) {
+        global $DB;
+        $context = $userlist->get_context();
+        if ($context->contextlevel != CONTEXT_MODULE) {
+            return;
+        }
+
+        $cm = get_coursemodule_from_id('pdfannotator', $context->instanceid);
+        $userids = $userlist->get_userids();
+
+        list($inusersql, $inuserparams) = $DB->get_in_or_equal($userids, SQL_PARAMS_NAMED);
+        $pdfannotatorid = ['pdfannotatorid'  => $cm->instance];
+        $params = array_merge($pdfannotatorid, $inuserparams);
+
+        $sql = "SELECT sub.id
+                  FROM {pdfannotator_subscriptions} sub
+                  JOIN {pdfannotator_annotations} ann ON anno.id = sub.annotationid
+                 WHERE anno.pdfannotatorid = :pdfannotatorid
+                   AND sub.userid $inusersql";
+
+        $subids = $DB->get_records_sql($sql, $params);
+
+        if(!empty($subids)) {
+            list($insubsql, $insubparams) = $DB->get_in_or_equal(array_keys($subids), SQL_PARAMS_NAMED);
+            $DB->delete_records_select('pdfannotator_subscriptions', " id $insubsql",  $insubparams);
+        }
+
+        $sql = "SELECT vot.id
+                  FROM {pdfannotator_votes} vot
+                  JOIN {pdfannotator_comments} com ON com.id = vot.commentid
+                 WHERE com.pdfannotatorid = :pdfannotatorid
+                   AND sub.userid $inusersql";
+
+        $comids = $DB->get_records_sql($sql, $params);
+
+        if(!empty($subids)) {
+            list($incomsql, $incomparams) = $DB->get_in_or_equal(array_keys($comids), SQL_PARAMS_NAMED);
+            $DB->delete_records_select('pdfannotator_votes', " id $incomsql",  $incomparams);
+        }
+
+        $DB->delete_records_select('pdfannotator_comments', " pdfannotatorid = :pdfannotatorid AND userid $inusersql",  $params);
+        $DB->delete_records_select('pdfannotator_reports', " pdfannotatorid = :pdfannotatorid AND userid $inusersql",  $params);
+        $DB->delete_records_select('pdfannotator_annotations', " pdfannotatorid = :pdfannotatorid AND userid $inusersql",  $params);
+    }
 }
